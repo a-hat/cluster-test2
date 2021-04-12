@@ -1,0 +1,11 @@
+apiVersion: phylake.io/v1alpha1
+kind: Cluster
+metadata:
+  name: cluster-test
+spec:
+  contact:
+    email: support@phylake.io
+  configuration:
+    description: Example cluster for Phylake
+  policies:
+    path: policies
