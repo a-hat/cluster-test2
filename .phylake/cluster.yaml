@@ -6,6 +6,6 @@ spec:
   contact:
     email: support@phylake.io
   configuration:
-    description: Example cluster for Phylake
-  policies:
+    description: Example cluster for Phylake TEst
+  policies: 
     path: policies
