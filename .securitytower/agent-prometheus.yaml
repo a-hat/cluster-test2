@@ -159,7 +159,6 @@ spec:
         revision: master
         path: cluster/namespaces/infra-monitoring/agent-prometheus
       targetNamespace: infra-monitoring
-      previousStage: playground.cc
     - name: test-2.sbx
       cluster:
         repository: https://github.com/syncier/cluster-sbx-test2.git
