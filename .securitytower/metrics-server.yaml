@@ -114,15 +114,6 @@ spec:
         path: cluster/namespaces/infra-monitoring/metrics-server
       targetNamespace: infra-monitoring
       previousStage: staging.adh
-    - name: analytics.cc
-      cluster:
-        repository: https://github.com/syncier/cluster-cc-analytics.git
-        name: analytics
-      resources:
-        revision: master
-        path: cluster/namespaces/infra-monitoring/metrics-server
-      targetNamespace: infra-monitoring
-      previousStage: svc.cc
     - name: dev.abs
       cluster:
         repository: https://github.com/syncier/cluster-abs-syc-dev.git

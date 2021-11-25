@@ -88,15 +88,6 @@ spec:
         path: cluster/namespaces/argocd/argocd
       targetNamespace: argocd
       previousStage: analytics.cc
-    - name: analytics.cc
-      cluster:
-        repository: https://github.com/syncier/cluster-cc-analytics.git
-        name: analytics
-      resources:
-        revision: master
-        path: cluster/namespaces/argocd/argocd
-      targetNamespace: argocd
-      previousStage: svc.cc
     - name: svc.cc
       cluster:
         repository: https://github.com/syncier/cluster-cc-svc.git
@@ -258,3 +249,12 @@ spec:
         path: cluster/namespaces/argocd/argocd
       targetNamespace: argocd
       previousStage: dev.analytics.grnry
+    - name: analytics.cc
+      cluster:
+        repository: https://github.com/syncier/cluster-cc-analytics.git
+        name: analytics
+      resources:
+        revision: master
+        path: cluster/namespaces/argocd/argocd
+      targetNamespace: argocd
+      previousStage: svc.cc

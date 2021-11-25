@@ -97,15 +97,6 @@ spec:
         path: cluster/namespaces/infra-logging/fluentd
       targetNamespace: infra-logging
       previousStage: staging.adh
-    - name: analytics.cc
-      cluster:
-        repository: https://github.com/syncier/cluster-cc-analytics.git
-        name: analytics
-      resources:
-        revision: master
-        path: cluster/namespaces/infra-logging/fluentd
-      targetNamespace: infra-logging
-      previousStage: svc.cc
     - name: dev.apkv
       cluster:
         repository: https://github.com/syncier/cluster-apkv-dev.git

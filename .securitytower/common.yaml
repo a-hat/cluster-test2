@@ -104,15 +104,6 @@ spec:
         path: cluster/namespaces/common
       targetNamespace: common
       previousStage: staging.adh
-    - name: analytics.cc
-      cluster:
-        repository: https://github.com/syncier/cluster-cc-analytics.git
-        name: analytics
-      resources:
-        revision: master
-        path: cluster/namespaces/common
-      targetNamespace: common
-      previousStage: svc.cc
     - name: dev.apkv
       cluster:
         repository: https://github.com/syncier/cluster-apkv-dev.git
@@ -122,6 +113,14 @@ spec:
         path: cluster/namespaces/common
       targetNamespace: common
       previousStage: analytics.cc
+    - name: dev.analytics.grnry
+      cluster:
+        repository: https://github.com/syncier/cluster-dev-grnry-analytics.git
+        name: analytics-grnry
+      resources:
+        revision: master
+        path: cluster/namespaces/common
+      targetNamespace: common
     - name: analytics.cc
       cluster:
         repository: https://github.com/syncier/cluster-cc-analytics.git
@@ -131,11 +130,3 @@ spec:
         path: cluster/namespaces/common
       targetNamespace: common
       previousStage: svc.cc
-    - name: dev.analytics.grnry
-      cluster:
-        repository: https://github.com/syncier/cluster-dev-grnry-analytics.git
-        name: analytics-grnry
-      resources:
-        revision: master
-        path: cluster/namespaces/common
-      targetNamespace: common

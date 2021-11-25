@@ -114,15 +114,6 @@ spec:
         path: cluster/namespaces/infra-monitoring/prometheus-cloudwatch-exporter
       targetNamespace: infra-monitoring
       previousStage: staging.adh
-    - name: analytics.cc
-      cluster:
-        repository: https://github.com/syncier/cluster-cc-analytics.git
-        name: analytics
-      resources:
-        revision: master
-        path: cluster/namespaces/infra-monitoring/prometheus-cloudwatch-exporter
-      targetNamespace: infra-monitoring
-      previousStage: svc.cc
     - name: dev.apkv
       cluster:
         repository: https://github.com/syncier/cluster-apkv-dev.git

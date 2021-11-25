@@ -15,11 +15,3 @@ spec:
         revision: master
         path: cluster/namespaces/loki
       targetNamespace: loki
-    - name: prod.sst
-      cluster:
-        repository: https://github.com/syncier/cluster-syc-sst-prod-cluster01.git
-        name: prod-cluster01
-      resources:
-        revision: master
-        path: cluster/namespaces/loki
-      targetNamespace: loki

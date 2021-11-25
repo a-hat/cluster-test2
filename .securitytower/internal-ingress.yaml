@@ -97,15 +97,6 @@ spec:
         path: cluster/namespaces/infra-ingress/internal-ingress
       targetNamespace: infra-ingress
       previousStage: staging.adh
-    - name: analytics.cc
-      cluster:
-        repository: https://github.com/syncier/cluster-cc-analytics.git
-        name: analytics
-      resources:
-        revision: master
-        path: cluster/namespaces/infra-ingress/internal-ingress
-      targetNamespace: infra-ingress
-      previousStage: svc.cc
     - name: dev.abs
       cluster:
         repository: https://github.com/syncier/cluster-abs-syc-dev.git
@@ -186,15 +177,6 @@ spec:
         path: cluster/namespaces/infra-ingress/internal-ingress
       targetNamespace: infra-ingress
       previousStage: test-1.sbx
-    - name: analytics.cc
-      cluster:
-        repository: https://github.com/syncier/cluster-cc-analytics.git
-        name: analytics
-      resources:
-        revision: master
-        path: cluster/namespaces/infra-ingress/internal-ingress
-      targetNamespace: infra-ingress
-      previousStage: svc.cc
     - name: test-01.dev
       cluster:
         repository: https://github.com/syncier/cluster-syc-cloud-dev-test01.git
@@ -222,15 +204,6 @@ spec:
         path: cluster/namespaces/infra-ingress/internal-ingress
       targetNamespace: infra-ingress
       previousStage: test-01.dev
-    - name: prod.sst
-      cluster:
-        repository: https://github.com/syncier/cluster-syc-sst-prod-cluster01.git
-        name: prod-cluster01
-      resources:
-        revision: master
-        path: cluster/namespaces/infra-ingress/internal-ingress
-      targetNamespace: infra-ingress
-      previousStage: test-01.dev
     - name: prod.analytics.grnry
       cluster:
         repository: https://github.com/syncier/cluster-prod-grnry-analytics.git
@@ -240,3 +213,12 @@ spec:
         path: cluster/namespaces/infra-ingress/internal-ingress
       targetNamespace: infra-ingress
       previousStage: dev.analytics.grnry
+    - name: analytics.cc
+      cluster:
+        repository: https://github.com/syncier/cluster-cc-analytics.git
+        name: analytics
+      resources:
+        revision: master
+        path: cluster/namespaces/infra-ingress/internal-ingress
+      targetNamespace: infra-ingress
+      previousStage: svc.cc

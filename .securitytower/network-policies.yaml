@@ -185,15 +185,6 @@ spec:
         path: cluster/global/network-policies
       targetNamespace: infra
       previousStage: test-1.sbx
-    - name: analytics.cc
-      cluster:
-        repository: https://github.com/syncier/cluster-cc-analytics.git
-        name: analytics
-      resources:
-        revision: master
-        path: cluster/global/network-policies
-      targetNamespace: infra
-      previousStage: svc.cc
     - name: test-01.dev
       cluster:
         repository: https://github.com/syncier/cluster-syc-cloud-dev-test01.git
@@ -230,15 +221,6 @@ spec:
         path: cluster/global/network-policies
       targetNamespace: infra
       previousStage: test-01.dev
-    - name: prod.sst
-      cluster:
-        repository: https://github.com/syncier/cluster-syc-sst-prod-cluster01.git
-        name: prod-cluster01
-      resources:
-        revision: master
-        path: cluster/global/network-policies
-      targetNamespace: infra
-      previousStage: test-01.dev
     - name: dev.abs
       cluster:
         repository: https://github.com/syncier/cluster-abs-syc-dev.git
@@ -257,3 +239,12 @@ spec:
         path: cluster/global/network-policies
       targetNamespace: infra
       previousStage: dev.analytics.grnry
+    - name: analytics.cc
+      cluster:
+        repository: https://github.com/syncier/cluster-cc-analytics.git
+        name: analytics
+      resources:
+        revision: master
+        path: cluster/global/network-policies
+      targetNamespace: infra
+      previousStage: svc.cc

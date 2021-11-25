@@ -87,15 +87,6 @@ spec:
         path: cluster/namespaces/infra/cluster-overprovisioner
       targetNamespace: infra
       previousStage: test-1.sbx
-    - name: analytics.cc
-      cluster:
-        repository: https://github.com/syncier/cluster-cc-analytics.git
-        name: analytics
-      resources:
-        revision: master
-        path: cluster/namespaces/infra/cluster-overprovisioner
-      targetNamespace: infra
-      previousStage: dev.cc
     - name: playground.cc
       cluster:
         repository: https://github.com/syncier/cluster-cc-playground.git
@@ -105,3 +96,12 @@ spec:
         path: cluster/namespaces/infra/cluster-overprovisioner
       targetNamespace: infra
       previousStage: test-4.sbx
+    - name: analytics.cc
+      cluster:
+        repository: https://github.com/syncier/cluster-cc-analytics.git
+        name: analytics
+      resources:
+        revision: master
+        path: cluster/namespaces/infra/cluster-overprovisioner
+      targetNamespace: infra
+      previousStage: dev.cc

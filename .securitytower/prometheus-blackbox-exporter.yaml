@@ -105,15 +105,6 @@ spec:
         path: cluster/namespaces/infra-monitoring/prometheus-blackbox-exporter
       targetNamespace: infra-monitoring
       previousStage: analytics.cc
-    - name: analytics.cc
-      cluster:
-        repository: https://github.com/syncier/cluster-cc-analytics.git
-        name: analytics
-      resources:
-        revision: master
-        path: cluster/namespaces/infra-monitoring/prometheus-blackbox-exporter
-      targetNamespace: infra-monitoring
-      previousStage: svc.cc
     - name: dev.apkv
       cluster:
         repository: https://github.com/syncier/cluster-apkv-dev.git
@@ -203,15 +194,6 @@ spec:
         path: cluster/namespaces/infra-monitoring/prometheus-blackbox-exporter
       targetNamespace: infra-monitoring
       previousStage: test-1.sbx
-    - name: analytics.cc
-      cluster:
-        repository: https://github.com/syncier/cluster-cc-analytics.git
-        name: analytics
-      resources:
-        revision: master
-        path: cluster/namespaces/infra-monitoring/prometheus-blackbox-exporter
-      targetNamespace: infra-monitoring
-      previousStage: svc.cc
     - name: test-01.dev
       cluster:
         repository: https://github.com/syncier/cluster-syc-cloud-dev-test01.git
@@ -239,15 +221,6 @@ spec:
         path: cluster/namespaces/infra-monitoring/prometheus-blackbox-exporter
       targetNamespace: infra-monitoring
       previousStage: test-01.dev
-    - name: prod.sst
-      cluster:
-        repository: https://github.com/syncier/cluster-syc-sst-prod-cluster01.git
-        name: prod-cluster01
-      resources:
-        revision: master
-        path: cluster/namespaces/infra-monitoring/prometheus-blackbox-exporter
-      targetNamespace: infra-monitoring
-      previousStage: test-01.dev
     - name: prod.analytics.grnry
       cluster:
         repository: https://github.com/syncier/cluster-prod-grnry-analytics.git
@@ -257,3 +230,12 @@ spec:
         path: cluster/namespaces/infra-monitoring/prometheus-blackbox-exporter
       targetNamespace: infra-monitoring
       previousStage: dev.analytics.grnry
+    - name: analytics.cc
+      cluster:
+        repository: https://github.com/syncier/cluster-cc-analytics.git
+        name: analytics
+      resources:
+        revision: master
+        path: cluster/namespaces/infra-monitoring/prometheus-blackbox-exporter
+      targetNamespace: infra-monitoring
+      previousStage: svc.cc
