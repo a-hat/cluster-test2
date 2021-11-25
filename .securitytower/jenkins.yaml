@@ -24,7 +24,7 @@ spec:
         revision: master
         path: cluster/namespaces/jenkins
       targetNamespace: jenkins
-      previousStage: analytics.cc
+      previousStage: dev.cc
     - name: test-8.sbx
       cluster:
         repository: https://github.com/syncier/cluster-sbx-test8.git

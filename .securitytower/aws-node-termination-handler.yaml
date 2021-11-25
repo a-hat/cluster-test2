@@ -24,7 +24,7 @@ spec:
         revision: master
         path: cluster/namespaces/infra/aws-node-termination-handler
       targetNamespace: infra
-      previousStage: analytics.cc
+      previousStage: dev.cc
     - name: prod.adh
       cluster:
         repository: https://github.com/syncier/cluster-adh-prod.git
@@ -42,7 +42,7 @@ spec:
         revision: master
         path: cluster/namespaces/infra/aws-node-termination-handler
       targetNamespace: infra
-      previousStage: analytics.cc
+      previousStage: dev.cc
     - name: test-1.sbx
       cluster:
         repository: https://github.com/syncier/cluster-sbx-test1.git

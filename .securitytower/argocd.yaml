@@ -24,7 +24,7 @@ spec:
         revision: master
         path: cluster/namespaces/argocd/argocd
       targetNamespace: argocd
-      previousStage: analytics.cc
+      previousStage: dev.apkv
     - name: edithcare.prod.sda
       cluster:
         repository: https://github.com/syncier/cluster-sda-edithcare-prod.git
@@ -38,15 +38,6 @@ spec:
       cluster:
         repository: https://github.com/syncier/cluster-sda-edithcare-staging.git
         name: staging
-      resources:
-        revision: master
-        path: cluster/namespaces/argocd/argocd
-      targetNamespace: argocd
-      previousStage: analytics.cc
-    - name: svc.sda
-      cluster:
-        repository: https://github.com/syncier/cluster-sda-svc.git
-        name: svc
       resources:
         revision: master
         path: cluster/namespaces/argocd/argocd
@@ -69,7 +60,7 @@ spec:
         revision: master
         path: cluster/namespaces/argocd/argocd
       targetNamespace: argocd
-      previousStage: analytics.cc
+      previousStage: svc.adh
     - name: dev.adh
       cluster:
         repository: https://github.com/syncier/cluster-adh-dev.git
@@ -78,7 +69,7 @@ spec:
         revision: master
         path: cluster/namespaces/argocd/argocd
       targetNamespace: argocd
-      previousStage: analytics.cc
+      previousStage: svc.cc
     - name: svc.adh
       cluster:
         repository: https://github.com/syncier/cluster-adh-svc.git
@@ -87,7 +78,7 @@ spec:
         revision: master
         path: cluster/namespaces/argocd/argocd
       targetNamespace: argocd
-      previousStage: analytics.cc
+      previousStage: dev.cc
     - name: svc.cc
       cluster:
         repository: https://github.com/syncier/cluster-cc-svc.git
@@ -141,7 +132,7 @@ spec:
         revision: master
         path: cluster/namespaces/argocd/argocd
       targetNamespace: argocd
-      previousStage: analytics.cc
+      previousStage: svc.cc
     - name: test-1.sbx
       cluster:
         repository: https://github.com/syncier/cluster-sbx-test1.git

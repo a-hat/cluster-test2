@@ -31,7 +31,7 @@ spec:
         revision: master
         path: cluster/namespaces/common
       targetNamespace: common
-      previousStage: analytics.cc
+      previousStage: dev.apkv
     - name: prod.apkv
       cluster:
         repository: https://github.com/syncier/cluster-apkv-prod.git
@@ -49,7 +49,7 @@ spec:
         revision: master
         path: cluster/namespaces/common
       targetNamespace: common
-      previousStage: analytics.cc
+      previousStage: svc.cc
     - name: edithcare.prod.sda
       cluster:
         repository: https://github.com/syncier/cluster-sda-edithcare-prod.git
@@ -59,15 +59,6 @@ spec:
         path: cluster/namespaces/common
       targetNamespace: common
       previousStage: edithcare.staging.sda
-    - name: svc.sda
-      cluster:
-        repository: https://github.com/syncier/cluster-sda-svc.git
-        name: svc
-      resources:
-        revision: master
-        path: cluster/namespaces/common
-      targetNamespace: common
-      previousStage: svc.cc
     - name: svc.adh
       cluster:
         repository: https://github.com/syncier/cluster-adh-svc.git
@@ -76,7 +67,7 @@ spec:
         revision: master
         path: cluster/namespaces/common
       targetNamespace: common
-      previousStage: analytics.cc
+      previousStage: dev.cc
     - name: dev.adh
       cluster:
         repository: https://github.com/syncier/cluster-adh-dev.git
@@ -85,7 +76,7 @@ spec:
         revision: master
         path: cluster/namespaces/common
       targetNamespace: common
-      previousStage: analytics.cc
+      previousStage: svc.cc
     - name: staging.adh
       cluster:
         repository: https://github.com/syncier/cluster-adh-staging.git
@@ -94,7 +85,7 @@ spec:
         revision: master
         path: cluster/namespaces/common
       targetNamespace: common
-      previousStage: analytics.cc
+      previousStage: svc.adh
     - name: prod.adh
       cluster:
         repository: https://github.com/syncier/cluster-adh-prod.git
@@ -112,7 +103,7 @@ spec:
         revision: master
         path: cluster/namespaces/common
       targetNamespace: common
-      previousStage: analytics.cc
+      previousStage: svc.cc
     - name: dev.analytics.grnry
       cluster:
         repository: https://github.com/syncier/cluster-dev-grnry-analytics.git

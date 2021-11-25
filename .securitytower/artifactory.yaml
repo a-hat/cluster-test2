@@ -33,7 +33,7 @@ spec:
         revision: master
         path: cluster/namespaces/artifactory
       targetNamespace: artifactory
-      previousStage: svc.cc
+      previousStage: test-4.sbx
     - name: test-4.sbx
       cluster:
         repository: https://github.com/syncier/cluster-sbx-test4.git

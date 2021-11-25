@@ -41,7 +41,7 @@ spec:
         revision: master
         path: cluster/global/network-policies
       targetNamespace: infra
-      previousStage: analytics.cc
+      previousStage: dev.apkv
     - name: prod.apkv
       cluster:
         repository: https://github.com/syncier/cluster-apkv-prod.git
@@ -59,7 +59,7 @@ spec:
         revision: master
         path: cluster/global/network-policies
       targetNamespace: infra
-      previousStage: analytics.cc
+      previousStage: svc.cc
     - name: edithcare.prod.sda
       cluster:
         repository: https://github.com/syncier/cluster-sda-edithcare-prod.git
@@ -69,15 +69,6 @@ spec:
         path: cluster/global/network-policies
       targetNamespace: infra
       previousStage: edithcare.staging.sda
-    - name: svc.sda
-      cluster:
-        repository: https://github.com/syncier/cluster-sda-svc.git
-        name: svc
-      resources:
-        revision: master
-        path: cluster/global/network-policies
-      targetNamespace: infra
-      previousStage: svc.cc
     - name: dev.apkv
       cluster:
         repository: https://github.com/syncier/cluster-apkv-dev.git
@@ -86,7 +77,7 @@ spec:
         revision: master
         path: cluster/global/network-policies
       targetNamespace: infra
-      previousStage: analytics.cc
+      previousStage: svc.cc
     - name: prod.syc-sst
       cluster:
         repository: https://github.com/syncier/cluster-syc-sst-prod-cluster01.git
@@ -104,7 +95,7 @@ spec:
         revision: master
         path: cluster/global/network-policies
       targetNamespace: infra
-      previousStage: analytics.cc
+      previousStage: svc.cc
     - name: staging.adh
       cluster:
         repository: https://github.com/syncier/cluster-adh-staging.git
@@ -113,7 +104,7 @@ spec:
         revision: master
         path: cluster/global/network-policies
       targetNamespace: infra
-      previousStage: analytics.cc
+      previousStage: svc.adh
     - name: test-1.sbx
       cluster:
         repository: https://github.com/syncier/cluster-sbx-test1.git
@@ -202,7 +193,7 @@ spec:
         revision: master
         path: cluster/global/network-policies
       targetNamespace: infra
-      previousStage: analytics.cc
+      previousStage: dev.cc
     - name: dev.analytics.grnry
       cluster:
         repository: https://github.com/syncier/cluster-dev-grnry-analytics.git

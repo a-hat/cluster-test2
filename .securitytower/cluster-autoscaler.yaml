@@ -24,7 +24,7 @@ spec:
         revision: master
         path: cluster/namespaces/infra/cluster-autoscaler
       targetNamespace: infra
-      previousStage: analytics.cc
+      previousStage: dev.cc
     - name: staging.adh
       cluster:
         repository: https://github.com/syncier/cluster-adh-staging.git
@@ -33,7 +33,7 @@ spec:
         revision: master
         path: cluster/namespaces/infra/cluster-autoscaler
       targetNamespace: infra
-      previousStage: analytics.cc
+      previousStage: dev.cc
     - name: prod.adh
       cluster:
         repository: https://github.com/syncier/cluster-adh-prod.git

@@ -69,15 +69,6 @@ spec:
         path: cluster/namespaces/infra-monitoring/metrics-server
       targetNamespace: infra-monitoring
       previousStage: edithcare.staging.sda
-    - name: svc.sda
-      cluster:
-        repository: https://github.com/syncier/cluster-sda-svc.git
-        name: svc
-      resources:
-        revision: master
-        path: cluster/namespaces/infra-monitoring/metrics-server
-      targetNamespace: infra-monitoring
-      previousStage: svc.cc
     - name: svc.adh
       cluster:
         repository: https://github.com/syncier/cluster-adh-svc.git

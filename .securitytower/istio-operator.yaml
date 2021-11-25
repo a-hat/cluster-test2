@@ -23,7 +23,7 @@ spec:
         revision: master
         path: cluster/namespaces/istio-operator/istio-operator
       targetNamespace: istio-operator
-      previousStage: test-3.sbx
+      previousStage: dev.apkv
     - name: dev.apkv
       cluster:
         repository: https://github.com/syncier/cluster-apkv-dev.git

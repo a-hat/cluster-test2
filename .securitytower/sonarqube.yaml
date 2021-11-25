@@ -33,7 +33,7 @@ spec:
         revision: master
         path: cluster/namespaces/sonarqube
       targetNamespace: sonarqube
-      previousStage: svc.cc
+      previousStage: test-1.sbx
     - name: test-1.sbx
       cluster:
         repository: https://github.com/syncier/cluster-sbx-test1.git
