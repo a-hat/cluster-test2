@@ -78,7 +78,7 @@ spec:
         revision: master
         path: cluster/namespaces/argocd/argocd
       targetNamespace: argocd
-      previousStage: dev.cc
+      previousStage: dev.adh
     - name: svc.cc
       cluster:
         repository: https://github.com/syncier/cluster-cc-svc.git

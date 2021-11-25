@@ -77,7 +77,7 @@ spec:
         revision: master
         path: cluster/namespaces/infra-monitoring/prometheus-cloudwatch-exporter
       targetNamespace: infra-monitoring
-      previousStage: dev.cc
+      previousStage: dev.adh
     - name: dev.adh
       cluster:
         repository: https://github.com/syncier/cluster-adh-dev.git

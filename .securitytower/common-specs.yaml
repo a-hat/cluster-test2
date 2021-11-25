@@ -77,7 +77,7 @@ spec:
         revision: master
         path: cluster/global/common-specs
       targetNamespace: argocd
-      previousStage: dev.cc
+      previousStage: dev.adh
     - name: dev.adh
       cluster:
         repository: https://github.com/syncier/cluster-adh-dev.git

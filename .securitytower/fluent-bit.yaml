@@ -78,7 +78,7 @@ spec:
         revision: master
         path: cluster/namespaces/infra-logging/fluent-bit
       targetNamespace: infra-logging
-      previousStage: dev.cc
+      previousStage: dev.adh
     - name: dev.adh
       cluster:
         repository: https://github.com/syncier/cluster-adh-dev.git

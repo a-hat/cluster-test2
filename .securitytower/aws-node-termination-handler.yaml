@@ -42,7 +42,7 @@ spec:
         revision: master
         path: cluster/namespaces/infra/aws-node-termination-handler
       targetNamespace: infra
-      previousStage: dev.cc
+      previousStage: dev.adh
     - name: test-1.sbx
       cluster:
         repository: https://github.com/syncier/cluster-sbx-test1.git

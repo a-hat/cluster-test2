@@ -193,7 +193,7 @@ spec:
         revision: master
         path: cluster/global/network-policies
       targetNamespace: infra
-      previousStage: dev.cc
+      previousStage: dev.adh
     - name: dev.analytics.grnry
       cluster:
         repository: https://github.com/syncier/cluster-dev-grnry-analytics.git

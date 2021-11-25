@@ -24,7 +24,7 @@ spec:
         revision: master
         path: cluster/namespaces/linkerd/linkerd
       targetNamespace: linkerd
-      previousStage: test-4.sbx
+      previousStage: dev.adh
     - name: prod.adh
       cluster:
         repository: https://github.com/syncier/cluster-adh-prod.git

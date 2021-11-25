@@ -78,7 +78,7 @@ spec:
         revision: master
         path: cluster/namespaces/infra-logging/fluentd
       targetNamespace: infra-logging
-      previousStage: dev.cc
+      previousStage: dev.adh
     - name: prod.adh
       cluster:
         repository: https://github.com/syncier/cluster-adh-prod.git

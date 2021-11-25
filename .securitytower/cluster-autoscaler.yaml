@@ -33,7 +33,7 @@ spec:
         revision: master
         path: cluster/namespaces/infra/cluster-autoscaler
       targetNamespace: infra
-      previousStage: dev.cc
+      previousStage: dev.adh
     - name: prod.adh
       cluster:
         repository: https://github.com/syncier/cluster-adh-prod.git
