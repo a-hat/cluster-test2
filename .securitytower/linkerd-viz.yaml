@@ -1,0 +1,26 @@
+apiVersion: securitytower.io/v1alpha1
+kind: Application
+metadata:
+  name: linkerd-viz
+spec:
+  applicationOwner: syncier
+  iconURL: https://linkerd.io/images/logo-only-200h.png
+  securityLevel: internal
+  stages:
+    - name: test-4.sbx
+      cluster:
+        repository: https://github.com/syncier/cluster-sbx-test4.git
+        name: sbx-test-4
+      resources:
+        revision: master
+        path: cluster/namespaces/linkerd-viz/linkerd-viz
+      targetNamespace: linkerd-viz
+    - name: dev.adh
+      cluster:
+        repository: https://github.com/syncier/cluster-adh-dev.git
+        name: dev
+      resources:
+        revision: master
+        path: cluster/namespaces/linkerd-viz/linkerd-viz
+      targetNamespace: linkerd-viz
+      previousStage: test-4.sbx

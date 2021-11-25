@@ -1,0 +1,141 @@
+apiVersion: securitytower.io/v1alpha1
+kind: Application
+metadata:
+  name: common
+spec:
+  applicationOwner: syncier
+  securityLevel: internal
+  stages:
+    - name: dev.cc
+      cluster:
+        repository: https://github.com/syncier/cluster-cc-dev.git
+        name: dev
+      resources:
+        revision: master
+        path: cluster/namespaces/common
+      targetNamespace: common
+    - name: svc.cc
+      cluster:
+        repository: https://github.com/syncier/cluster-cc-svc.git
+        name: svc
+      resources:
+        revision: master
+        path: cluster/namespaces/common
+      targetNamespace: common
+      previousStage: dev.cc
+    - name: staging.apkv
+      cluster:
+        repository: https://github.com/syncier/cluster-apkv-staging.git
+        name: staging
+      resources:
+        revision: master
+        path: cluster/namespaces/common
+      targetNamespace: common
+      previousStage: analytics.cc
+    - name: prod.apkv
+      cluster:
+        repository: https://github.com/syncier/cluster-apkv-prod.git
+        name: prod
+      resources:
+        revision: master
+        path: cluster/namespaces/common
+      targetNamespace: common
+      previousStage: staging.apkv
+    - name: edithcare.staging.sda
+      cluster:
+        repository: https://github.com/syncier/cluster-sda-edithcare-staging.git
+        name: staging
+      resources:
+        revision: master
+        path: cluster/namespaces/common
+      targetNamespace: common
+      previousStage: analytics.cc
+    - name: edithcare.prod.sda
+      cluster:
+        repository: https://github.com/syncier/cluster-sda-edithcare-prod.git
+        name: prod
+      resources:
+        revision: master
+        path: cluster/namespaces/common
+      targetNamespace: common
+      previousStage: edithcare.staging.sda
+    - name: svc.sda
+      cluster:
+        repository: https://github.com/syncier/cluster-sda-svc.git
+        name: svc
+      resources:
+        revision: master
+        path: cluster/namespaces/common
+      targetNamespace: common
+      previousStage: svc.cc
+    - name: svc.adh
+      cluster:
+        repository: https://github.com/syncier/cluster-adh-svc.git
+        name: svc
+      resources:
+        revision: master
+        path: cluster/namespaces/common
+      targetNamespace: common
+      previousStage: analytics.cc
+    - name: dev.adh
+      cluster:
+        repository: https://github.com/syncier/cluster-adh-dev.git
+        name: dev
+      resources:
+        revision: master
+        path: cluster/namespaces/common
+      targetNamespace: common
+      previousStage: analytics.cc
+    - name: staging.adh
+      cluster:
+        repository: https://github.com/syncier/cluster-adh-staging.git
+        name: staging
+      resources:
+        revision: master
+        path: cluster/namespaces/common
+      targetNamespace: common
+      previousStage: analytics.cc
+    - name: prod.adh
+      cluster:
+        repository: https://github.com/syncier/cluster-adh-prod.git
+        name: prod
+      resources:
+        revision: master
+        path: cluster/namespaces/common
+      targetNamespace: common
+      previousStage: staging.adh
+    - name: analytics.cc
+      cluster:
+        repository: https://github.com/syncier/cluster-cc-analytics.git
+        name: analytics
+      resources:
+        revision: master
+        path: cluster/namespaces/common
+      targetNamespace: common
+      previousStage: svc.cc
+    - name: dev.apkv
+      cluster:
+        repository: https://github.com/syncier/cluster-apkv-dev.git
+        name: dev
+      resources:
+        revision: master
+        path: cluster/namespaces/common
+      targetNamespace: common
+      previousStage: analytics.cc
+    - name: analytics.cc
+      cluster:
+        repository: https://github.com/syncier/cluster-cc-analytics.git
+        name: analytics
+      resources:
+        revision: master
+        path: cluster/namespaces/common
+      targetNamespace: common
+      previousStage: svc.cc
+    - name: dev.analytics.grnry
+      cluster:
+        repository: https://github.com/syncier/cluster-dev-grnry-analytics.git
+        name: analytics-grnry
+      resources:
+        revision: master
+        path: cluster/namespaces/common
+      targetNamespace: common

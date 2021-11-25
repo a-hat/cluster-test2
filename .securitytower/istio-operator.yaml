@@ -1,0 +1,44 @@
+apiVersion: securitytower.io/v1alpha1
+kind: Application
+metadata:
+  name: istio-operator
+spec:
+  applicationOwner: syncier
+  iconURL: https://istio.io/latest/img/istio-whitelogo-bluebackground-framed.svg
+  securityLevel: internal
+  stages:
+    - name: test-3.sbx
+      cluster:
+        repository: https://github.com/syncier/cluster-sbx-test3.git
+        name: sbx-test-3
+      resources:
+        revision: master
+        path: cluster/namespaces/istio-operator/istio-operator
+      targetNamespace: istio-operator
+    - name: staging.apkv
+      cluster:
+        repository: https://github.com/syncier/cluster-apkv-staging.git
+        name: staging
+      resources:
+        revision: master
+        path: cluster/namespaces/istio-operator/istio-operator
+      targetNamespace: istio-operator
+      previousStage: test-3.sbx
+    - name: dev.apkv
+      cluster:
+        repository: https://github.com/syncier/cluster-apkv-dev.git
+        name: dev
+      resources:
+        revision: master
+        path: cluster/namespaces/istio-operator/istio-operator
+      targetNamespace: istio-operator
+      previousStage: test-3.sbx
+    - name: prod.apkv
+      cluster:
+        repository: https://github.com/syncier/cluster-apkv-prod.git
+        name: prod
+      resources:
+        revision: master
+        path: cluster/namespaces/istio-operator/istio-operator
+      targetNamespace: istio-operator
+      previousStage: staging.apkv

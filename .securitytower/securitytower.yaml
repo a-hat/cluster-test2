@@ -1,0 +1,54 @@
+apiVersion: securitytower.io/v1alpha1
+kind: Application
+metadata:
+  name: securitytower
+spec:
+  applicationOwner: syncier
+  iconURL: https://securitytower.syncier.com/favicon.ico
+  securityLevel: internal
+  stages:
+    - name: dev.syc-sst
+      cluster:
+        repository: https://github.com/syncier/cluster-syc-sst-prod-cluster01.git
+        name: prod-cluster01
+      resources:
+        repository: https://github.com/syncier/app-securitytower-dev.git
+        revision: main
+        path: securitytower
+      targetNamespace: securitytower-dev
+      previousStage: playground.cc
+    - name: svc.cc
+      cluster:
+        repository: https://github.com/syncier/cluster-cc-svc.git
+        name: svc
+      resources:
+        revision: master
+        path: cluster/namespaces/securitytower
+      targetNamespace: securitytower
+      previousStage: dev.syc-sst
+    - name: svc.adh
+      cluster:
+        repository: https://github.com/syncier/cluster-adh-svc.git
+        name: svc
+      resources:
+        revision: master
+        path: cluster/namespaces/securitytower
+      targetNamespace: securitytower
+      previousStage: svc.cc
+    - name: prod.syc-sst
+      cluster:
+        repository: https://github.com/syncier/cluster-syc-sst-prod-cluster01.git
+        name: prod-cluster01
+      resources:
+        revision: master
+        path: cluster/namespaces/securitytower
+      targetNamespace: securitytower
+      previousStage: svc.cc
+    - name: playground.cc
+      cluster:
+        repository: https://github.com/syncier/cluster-cc-playground.git
+        name: playground
+      resources:
+        revision: master
+        path: cluster/namespaces/securitytower
+      targetNamespace: securitytower

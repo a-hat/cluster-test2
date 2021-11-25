@@ -1,0 +1,26 @@
+apiVersion: securitytower.io/v1alpha1
+kind: Application
+metadata:
+  name: harbor
+spec:
+  applicationOwner: syncier
+  iconURL: https://raw.githubusercontent.com/goharbor/harbor/master/docs/img/harbor_logo.png
+  securityLevel: internal
+  stages:
+    - name: playground.cc
+      cluster:
+        repository: https://github.com/syncier/cluster-cc-playground.git
+        name: playground
+      resources:
+        revision: master
+        path: cluster/namespaces/harbor
+      targetNamespace: harbor
+    - name: svc.cc
+      cluster:
+        repository: https://github.com/syncier/cluster-cc-svc.git
+        name: svc
+      resources:
+        revision: master
+        path: cluster/namespaces/harbor
+      targetNamespace: harbor
+      previousStage: playground.cc

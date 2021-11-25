@@ -1,0 +1,34 @@
+apiVersion: securitytower.io/v1alpha1
+kind: Application
+metadata:
+  name: anchore
+spec:
+  applicationOwner: syncier
+  iconURL: https://anchore.com/wp-content/uploads/2016/08/anchore.png
+  securityLevel: internal
+  stages:
+    - name: svc.cc
+      cluster:
+        repository: https://github.com/syncier/cluster-cc-svc.git
+        name: svc
+      resources:
+        revision: master
+        path: cluster/namespaces/anchore
+      targetNamespace: anchore
+      previousStage: test-5.sbx
+    - name: test5.sbx
+      cluster:
+        repository: https://github.com/syncier/cluster-sbx-test5.git
+        name: sbx-test-5
+      resources:
+        revision: master
+        path: cluster/namespaces/anchore
+      targetNamespace: anchore
+    - name: test-5.sbx
+      cluster:
+        repository: https://github.com/syncier/cluster-sbx-test5.git
+        name: sbx-test-5
+      resources:
+        revision: master
+        path: cluster/namespaces/anchore
+      targetNamespace: anchore

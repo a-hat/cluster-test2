@@ -1,0 +1,43 @@
+apiVersion: securitytower.io/v1alpha1
+kind: Application
+metadata:
+  name: keycloak-service
+spec:
+  applicationOwner: syncier
+  securityLevel: internal
+  stages:
+    - name: test-4.sbx
+      cluster:
+        repository: https://github.com/syncier/cluster-sbx-test4.git
+        name: sbx-test-4
+      resources:
+        revision: master
+        path: cluster/namespaces/infra-keycloak/keycloak-service
+      targetNamespace: infra-keycloak
+    - name: svc.adh.dev
+      cluster:
+        repository: https://github.com/syncier/cluster-adh-svc.git
+        name: svc
+      resources:
+        revision: master
+        path: cluster/namespaces/infra-keycloak-dev/keycloak-development
+      targetNamespace: infra-keycloak-dev
+      previousStage: test-4.sbx
+    - name: svc.adh.staging
+      cluster:
+        repository: https://github.com/syncier/cluster-adh-svc.git
+        name: svc
+      resources:
+        revision: master
+        path: cluster/namespaces/infra-keycloak-staging/keycloak-staging
+      targetNamespace: infra-keycloak-staging
+      previousStage: svc.adh.dev
+    - name: svc.adh.prod
+      cluster:
+        repository: https://github.com/syncier/cluster-adh-svc.git
+        name: svc
+      resources:
+        revision: master
+        path: cluster/namespaces/iinfra-keycloak-prod/keycloak-production
+      targetNamespace: infra-keycloak-prod
+      previousStage: svc.adh.staging

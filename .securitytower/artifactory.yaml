@@ -1,0 +1,44 @@
+apiVersion: securitytower.io/v1alpha1
+kind: Application
+metadata:
+  name: artifactory
+spec:
+  applicationOwner: syncier
+  iconURL: https://raw.githubusercontent.com/jfrog/charts/master/stable/artifactory-ha/logo/artifactory-logo.png
+  securityLevel: internal
+  stages:
+    - name: playground.cc
+      cluster:
+        repository: https://github.com/syncier/cluster-cc-playground.git
+        name: playground
+      resources:
+        revision: master
+        path: cluster/namespaces/artifactory
+      targetNamespace: artifactory
+      previousStage: test-4.sbx
+    - name: svc.cc
+      cluster:
+        repository: https://github.com/syncier/cluster-cc-svc.git
+        name: svc
+      resources:
+        revision: master
+        path: cluster/namespaces/artifactory
+      targetNamespace: artifactory
+      previousStage: playground.cc
+    - name: svc.adh
+      cluster:
+        repository: https://github.com/syncier/cluster-adh-svc.git
+        name: svc
+      resources:
+        revision: master
+        path: cluster/namespaces/artifactory
+      targetNamespace: artifactory
+      previousStage: svc.cc
+    - name: test-4.sbx
+      cluster:
+        repository: https://github.com/syncier/cluster-sbx-test4.git
+        name: sbx-test-4
+      resources:
+        revision: master
+        path: cluster/namespaces/artifactory
+      targetNamespace: artifactory

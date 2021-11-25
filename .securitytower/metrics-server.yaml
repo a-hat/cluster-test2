@@ -1,0 +1,142 @@
+apiVersion: securitytower.io/v1alpha1
+kind: Application
+metadata:
+  name: metrics-server
+spec:
+  applicationOwner: syncier
+  iconURL: https://bitnami.com/assets/stacks/metrics-server/img/metrics-server-stack-220x234.png
+  securityLevel: internal
+  stages:
+    - name: playground.cc
+      cluster:
+        repository: https://github.com/syncier/cluster-cc-playground.git
+        name: playground
+      resources:
+        revision: master
+        path: cluster/namespaces/infra-monitoring/metrics-server
+      targetNamespace: infra-monitoring
+    - name: dev.cc
+      cluster:
+        repository: https://github.com/syncier/cluster-cc-dev.git
+        name: dev
+      resources:
+        revision: master
+        path: cluster/namespaces/infra-monitoring/metrics-server
+      targetNamespace: infra-monitoring
+      previousStage: playground.cc
+    - name: svc.cc
+      cluster:
+        repository: https://github.com/syncier/cluster-cc-svc.git
+        name: svc
+      resources:
+        revision: master
+        path: cluster/namespaces/infra-monitoring/metrics-server
+      targetNamespace: infra-monitoring
+      previousStage: dev.cc
+    - name: staging.apkv
+      cluster:
+        repository: https://github.com/syncier/cluster-apkv-staging.git
+        name: staging
+      resources:
+        revision: master
+        path: cluster/namespaces/infra-monitoring/metrics-server
+      targetNamespace: infra-monitoring
+      previousStage: dev.apkv
+    - name: prod.apkv
+      cluster:
+        repository: https://github.com/syncier/cluster-apkv-prod.git
+        name: prod
+      resources:
+        revision: master
+        path: cluster/namespaces/infra-monitoring/metrics-server
+      targetNamespace: infra-monitoring
+      previousStage: staging.apkv
+    - name: edithcare.staging.sda
+      cluster:
+        repository: https://github.com/syncier/cluster-sda-edithcare-staging.git
+        name: staging
+      resources:
+        revision: master
+        path: cluster/namespaces/infra-monitoring/metrics-server
+      targetNamespace: infra-monitoring
+      previousStage: svc.cc
+    - name: edithcare.prod.sda
+      cluster:
+        repository: https://github.com/syncier/cluster-sda-edithcare-prod.git
+        name: prod
+      resources:
+        revision: master
+        path: cluster/namespaces/infra-monitoring/metrics-server
+      targetNamespace: infra-monitoring
+      previousStage: edithcare.staging.sda
+    - name: svc.sda
+      cluster:
+        repository: https://github.com/syncier/cluster-sda-svc.git
+        name: svc
+      resources:
+        revision: master
+        path: cluster/namespaces/infra-monitoring/metrics-server
+      targetNamespace: infra-monitoring
+      previousStage: svc.cc
+    - name: svc.adh
+      cluster:
+        repository: https://github.com/syncier/cluster-adh-svc.git
+        name: svc
+      resources:
+        revision: master
+        path: cluster/namespaces/infra-monitoring/metrics-server
+      targetNamespace: infra-monitoring
+      previousStage: svc.cc
+    - name: dev.adh
+      cluster:
+        repository: https://github.com/syncier/cluster-adh-dev.git
+        name: dev
+      resources:
+        revision: master
+        path: cluster/namespaces/infra-monitoring/metrics-server
+      targetNamespace: infra-monitoring
+      previousStage: svc.cc
+    - name: staging.adh
+      cluster:
+        repository: https://github.com/syncier/cluster-adh-staging.git
+        name: staging
+      resources:
+        revision: master
+        path: cluster/namespaces/infra-monitoring/metrics-server
+      targetNamespace: infra-monitoring
+      previousStage: dev.adh
+    - name: prod.adh
+      cluster:
+        repository: https://github.com/syncier/cluster-adh-prod.git
+        name: prod
+      resources:
+        revision: master
+        path: cluster/namespaces/infra-monitoring/metrics-server
+      targetNamespace: infra-monitoring
+      previousStage: staging.adh
+    - name: analytics.cc
+      cluster:
+        repository: https://github.com/syncier/cluster-cc-analytics.git
+        name: analytics
+      resources:
+        revision: master
+        path: cluster/namespaces/infra-monitoring/metrics-server
+      targetNamespace: infra-monitoring
+      previousStage: svc.cc
+    - name: dev.abs
+      cluster:
+        repository: https://github.com/syncier/cluster-abs-syc-dev.git
+        name: dev
+      resources:
+        revision: master
+        path: cluster/namespaces/infra-monitoring/metrics-server
+      targetNamespace: infra-monitoring
+    - name: dev.apkv
+      cluster:
+        repository: https://github.com/syncier/cluster-apkv-dev.git
+        name: dev
+      resources:
+        revision: master
+        path: cluster/namespaces/infra-monitoring/metrics-server
+      targetNamespace: infra-monitoring
+      previousStage: svc.cc

@@ -1,10 +1,9 @@
 apiVersion: securitytower.io/v1alpha1
 kind: Application
 metadata:
-  name: agent-prometheus
+  name: prometheus-cloudwatch-exporter
 spec:
   applicationOwner: syncier
-  iconURL: https://raw.githubusercontent.com/prometheus/prometheus.github.io/master/assets/prometheus_logo-cb55bb5c346.png
   securityLevel: internal
   stages:
     - name: playground.cc
@@ -13,7 +12,7 @@ spec:
         name: playground
       resources:
         revision: master
-        path: cluster/namespaces/infra-monitoring/agent-prometheus
+        path: cluster/namespaces/infra-monitoring/prometheus-cloudwatch-exporter
       targetNamespace: infra-monitoring
       previousStage: test-4.sbx
     - name: dev.cc
@@ -22,7 +21,7 @@ spec:
         name: dev
       resources:
         revision: master
-        path: cluster/namespaces/infra-monitoring/agent-prometheus
+        path: cluster/namespaces/infra-monitoring/prometheus-cloudwatch-exporter
       targetNamespace: infra-monitoring
       previousStage: test-4.sbx
     - name: svc.cc
@@ -31,7 +30,7 @@ spec:
         name: svc
       resources:
         revision: master
-        path: cluster/namespaces/infra-monitoring/agent-prometheus
+        path: cluster/namespaces/infra-monitoring/prometheus-cloudwatch-exporter
       targetNamespace: infra-monitoring
       previousStage: dev.cc
     - name: staging.apkv
@@ -40,7 +39,7 @@ spec:
         name: staging
       resources:
         revision: master
-        path: cluster/namespaces/infra-monitoring/agent-prometheus
+        path: cluster/namespaces/infra-monitoring/prometheus-cloudwatch-exporter
       targetNamespace: infra-monitoring
       previousStage: analytics.cc
     - name: prod.apkv
@@ -49,7 +48,7 @@ spec:
         name: prod
       resources:
         revision: master
-        path: cluster/namespaces/infra-monitoring/agent-prometheus
+        path: cluster/namespaces/infra-monitoring/prometheus-cloudwatch-exporter
       targetNamespace: infra-monitoring
       previousStage: staging.apkv
     - name: edithcare.staging.sda
@@ -58,7 +57,7 @@ spec:
         name: staging
       resources:
         revision: master
-        path: cluster/namespaces/infra-monitoring/agent-prometheus
+        path: cluster/namespaces/infra-monitoring/prometheus-cloudwatch-exporter
       targetNamespace: infra-monitoring
       previousStage: analytics.cc
     - name: edithcare.prod.sda
@@ -67,7 +66,7 @@ spec:
         name: prod
       resources:
         revision: master
-        path: cluster/namespaces/infra-monitoring/agent-prometheus
+        path: cluster/namespaces/infra-monitoring/prometheus-cloudwatch-exporter
       targetNamespace: infra-monitoring
       previousStage: edithcare.staging.sda
     - name: svc.sda
@@ -76,7 +75,7 @@ spec:
         name: svc
       resources:
         revision: master
-        path: cluster/namespaces/infra-monitoring/agent-prometheus
+        path: cluster/namespaces/infra-monitoring/prometheus-cloudwatch-exporter
       targetNamespace: infra-monitoring
       previousStage: svc.cc
     - name: svc.adh
@@ -85,7 +84,7 @@ spec:
         name: svc
       resources:
         revision: master
-        path: cluster/namespaces/infra-monitoring/agent-prometheus
+        path: cluster/namespaces/infra-monitoring/prometheus-cloudwatch-exporter
       targetNamespace: infra-monitoring
       previousStage: analytics.cc
     - name: dev.adh
@@ -94,7 +93,7 @@ spec:
         name: dev
       resources:
         revision: master
-        path: cluster/namespaces/infra-monitoring/agent-prometheus
+        path: cluster/namespaces/infra-monitoring/prometheus-cloudwatch-exporter
       targetNamespace: infra-monitoring
       previousStage: analytics.cc
     - name: staging.adh
@@ -103,7 +102,7 @@ spec:
         name: staging
       resources:
         revision: master
-        path: cluster/namespaces/infra-monitoring/agent-prometheus
+        path: cluster/namespaces/infra-monitoring/prometheus-cloudwatch-exporter
       targetNamespace: infra-monitoring
       previousStage: analytics.cc
     - name: prod.adh
@@ -112,43 +111,34 @@ spec:
         name: prod
       resources:
         revision: master
-        path: cluster/namespaces/infra-monitoring/agent-prometheus
+        path: cluster/namespaces/infra-monitoring/prometheus-cloudwatch-exporter
       targetNamespace: infra-monitoring
       previousStage: staging.adh
-    - name: dev.abs
+    - name: analytics.cc
       cluster:
-        repository: https://github.com/syncier/cluster-abs-syc-dev.git
-        name: dev
+        repository: https://github.com/syncier/cluster-cc-analytics.git
+        name: analytics
       resources:
         revision: master
-        path: cluster/namespaces/infra-monitoring/agent-prometheus
+        path: cluster/namespaces/infra-monitoring/prometheus-cloudwatch-exporter
       targetNamespace: infra-monitoring
-      previousStage: test-01.dev
+      previousStage: svc.cc
     - name: dev.apkv
       cluster:
         repository: https://github.com/syncier/cluster-apkv-dev.git
         name: dev
       resources:
         revision: master
-        path: cluster/namespaces/infra-monitoring/agent-prometheus
+        path: cluster/namespaces/infra-monitoring/prometheus-cloudwatch-exporter
       targetNamespace: infra-monitoring
       previousStage: analytics.cc
-    - name: prod.syc-sst
-      cluster:
-        repository: https://github.com/syncier/cluster-syc-sst-prod-cluster01.git
-        name: prod-cluster01
-      resources:
-        revision: master
-        path: cluster/namespaces/infra-monitoring/agent-prometheus
-      targetNamespace: infra-monitoring
-      previousStage: test-01.dev
     - name: test-1.sbx
       cluster:
         repository: https://github.com/syncier/cluster-sbx-test1.git
         name: sbx-test-1
       resources:
         revision: master
-        path: cluster/namespaces/infra-monitoring/agent-prometheus
+        path: cluster/namespaces/infra-monitoring/prometheus-cloudwatch-exporter
       targetNamespace: infra-monitoring
     - name: test-2.sbx
       cluster:
@@ -156,7 +146,7 @@ spec:
         name: sbx-test-2
       resources:
         revision: master
-        path: cluster/namespaces/infra-monitoring/agent-prometheus
+        path: cluster/namespaces/infra-monitoring/prometheus-cloudwatch-exporter
       targetNamespace: infra-monitoring
       previousStage: test-1.sbx
     - name: test-3.sbx
@@ -165,7 +155,7 @@ spec:
         name: sbx-test-3
       resources:
         revision: master
-        path: cluster/namespaces/infra-monitoring/agent-prometheus
+        path: cluster/namespaces/infra-monitoring/prometheus-cloudwatch-exporter
       targetNamespace: infra-monitoring
       previousStage: test-1.sbx
     - name: test-4.sbx
@@ -174,7 +164,7 @@ spec:
         name: sbx-test-4
       resources:
         revision: master
-        path: cluster/namespaces/infra-monitoring/agent-prometheus
+        path: cluster/namespaces/infra-monitoring/prometheus-cloudwatch-exporter
       targetNamespace: infra-monitoring
       previousStage: test-3.sbx
     - name: test-5.sbx
@@ -183,7 +173,7 @@ spec:
         name: sbx-test-5
       resources:
         revision: master
-        path: cluster/namespaces/infra-monitoring/agent-prometheus
+        path: cluster/namespaces/infra-monitoring/prometheus-cloudwatch-exporter
       targetNamespace: infra-monitoring
       previousStage: test-1.sbx
     - name: test-6.sbx
@@ -192,7 +182,7 @@ spec:
         name: sbx-test-6
       resources:
         revision: master
-        path: cluster/namespaces/infra-monitoring/agent-prometheus
+        path: cluster/namespaces/infra-monitoring/prometheus-cloudwatch-exporter
       targetNamespace: infra-monitoring
       previousStage: test-1.sbx
     - name: test-7.sbx
@@ -201,7 +191,7 @@ spec:
         name: sbx-test-7
       resources:
         revision: master
-        path: cluster/namespaces/infra-monitoring/agent-prometheus
+        path: cluster/namespaces/infra-monitoring/prometheus-cloudwatch-exporter
       targetNamespace: infra-monitoring
       previousStage: test-1.sbx
     - name: test-8.sbx
@@ -210,7 +200,7 @@ spec:
         name: sbx-test-8
       resources:
         revision: master
-        path: cluster/namespaces/infra-monitoring/agent-prometheus
+        path: cluster/namespaces/infra-monitoring/prometheus-cloudwatch-exporter
       targetNamespace: infra-monitoring
       previousStage: test-1.sbx
     - name: analytics.cc
@@ -219,51 +209,6 @@ spec:
         name: analytics
       resources:
         revision: master
-        path: cluster/namespaces/infra-monitoring/agent-prometheus
+        path: cluster/namespaces/infra-monitoring/prometheus-cloudwatch-exporter
       targetNamespace: infra-monitoring
       previousStage: svc.cc
-    - name: test-01.dev
-      cluster:
-        repository: https://github.com/syncier/cluster-syc-cloud-dev-test01.git
-        name: test01
-      resources:
-        revision: master
-        path: cluster/namespaces/infra-monitoring/agent-prometheus
-      targetNamespace: infra-monitoring
-      previousStage: test-1.sbx
-    - name: dev.analytics.grnry
-      cluster:
-        repository: https://github.com/syncier/cluster-dev-grnry-analytics.git
-        name: analytics-grnry
-      resources:
-        revision: master
-        path: cluster/namespaces/infra-monitoring/agent-prometheus
-      targetNamespace: infra-monitoring
-      previousStage: test-01.dev
-    - name: dev.analytics.abs
-      cluster:
-        repository: https://github.com/syncier/cluster-syc-analytics-dev-seceda01.git
-        name: analytics-dev-seceda01
-      resources:
-        revision: master
-        path: cluster/namespaces/infra-monitoring/agent-prometheus
-      targetNamespace: infra-monitoring
-      previousStage: test-01.dev
-    - name: prod.sst
-      cluster:
-        repository: https://github.com/syncier/cluster-syc-sst-prod-cluster01.git
-        name: prod-cluster01
-      resources:
-        revision: master
-        path: cluster/namespaces/infra-monitoring/agent-prometheus
-      targetNamespace: infra-monitoring
-      previousStage: test-01.dev
-    - name: prod.analytics.grnry
-      cluster:
-        repository: https://github.com/syncier/cluster-prod-grnry-analytics.git
-        name: analytics-grnry-prod
-      resources:
-        revision: master
-        path: cluster/namespaces/infra-monitoring/agent-prometheus
-      targetNamespace: infra-monitoring
-      previousStage: dev.analytics.grnry

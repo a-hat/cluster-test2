@@ -1,0 +1,44 @@
+apiVersion: securitytower.io/v1alpha1
+kind: Application
+metadata:
+  name: sonarqube
+spec:
+  applicationOwner: syncier
+  iconURL: https://www.sonarqube.org/assets/logo-31ad3115b1b4b120f3d1efd63e6b13ac9f1f89437f0cf6881cc4d8b5603a52b4.svg
+  securityLevel: internal
+  stages:
+    - name: playground.cc
+      cluster:
+        repository: https://github.com/syncier/cluster-cc-playground.git
+        name: playground
+      resources:
+        revision: master
+        path: cluster/namespaces/sonarqube
+      targetNamespace: sonarqube
+      previousStage: test-1.sbx
+    - name: svc.cc
+      cluster:
+        repository: https://github.com/syncier/cluster-cc-svc.git
+        name: svc
+      resources:
+        revision: master
+        path: cluster/namespaces/sonarqube
+      targetNamespace: sonarqube
+      previousStage: playground.cc
+    - name: svc.adh
+      cluster:
+        repository: https://github.com/syncier/cluster-adh-svc.git
+        name: svc
+      resources:
+        revision: master
+        path: cluster/namespaces/sonarqube
+      targetNamespace: sonarqube
+      previousStage: svc.cc
+    - name: test-1.sbx
+      cluster:
+        repository: https://github.com/syncier/cluster-sbx-test1.git
+        name: sbx-test-1
+      resources:
+        revision: master
+        path: cluster/namespaces/sonarqube
+      targetNamespace: sonarqube

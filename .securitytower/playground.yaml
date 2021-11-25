@@ -1,0 +1,25 @@
+apiVersion: securitytower.io/v1alpha1
+kind: Application
+metadata:
+  name: playground
+spec:
+  applicationOwner: syncier
+  securityLevel: internal
+  stages:
+    - name: playground-admin
+      cluster:
+        repository: https://github.com/syncier/cluster-cc-dev.git
+        name: dev
+      resources:
+        revision: master
+        path: cluster/namespaces/playground-admin
+      targetNamespace: playground-admin
+      previousStage: playground-edit
+    - name: playground-edit
+      cluster:
+        repository: https://github.com/syncier/cluster-cc-dev.git
+        name: dev
+      resources:
+        revision: master
+        path: cluster/namespaces/playground-edit
+      targetNamespace: playground-edit

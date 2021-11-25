@@ -1,0 +1,53 @@
+apiVersion: securitytower.io/v1alpha1
+kind: Application
+metadata:
+  name: linkerd
+spec:
+  applicationOwner: syncier
+  iconURL: https://linkerd.io/images/logo-only-200h.png
+  securityLevel: internal
+  stages:
+    - name: dev.adh
+      cluster:
+        repository: https://github.com/syncier/cluster-adh-dev.git
+        name: dev
+      resources:
+        revision: master
+        path: cluster/namespaces/linkerd/linkerd
+      targetNamespace: linkerd
+      previousStage: playground.cc
+    - name: staging.adh
+      cluster:
+        repository: https://github.com/syncier/cluster-adh-staging.git
+        name: staging
+      resources:
+        revision: master
+        path: cluster/namespaces/linkerd/linkerd
+      targetNamespace: linkerd
+      previousStage: playground.cc
+    - name: prod.adh
+      cluster:
+        repository: https://github.com/syncier/cluster-adh-prod.git
+        name: prod
+      resources:
+        revision: master
+        path: cluster/namespaces/linkerd/linkerd
+      targetNamespace: linkerd
+      previousStage: staging.adh
+    - name: test-4.sbx
+      cluster:
+        repository: https://github.com/syncier/cluster-sbx-test4.git
+        name: sbx-test-4
+      resources:
+        revision: master
+        path: cluster/namespaces/linkerd/linkerd
+      targetNamespace: linkerd
+    - name: playground.cc
+      cluster:
+        repository: https://github.com/syncier/cluster-cc-playground.git
+        name: playground
+      resources:
+        revision: master
+        path: cluster/namespaces/linkerd/linkerd
+      targetNamespace: linkerd
+      previousStage: test-4.sbx

@@ -1,10 +1,10 @@
 apiVersion: securitytower.io/v1alpha1
 kind: Application
 metadata:
-  name: agent-prometheus
+  name: velero
 spec:
   applicationOwner: syncier
-  iconURL: https://raw.githubusercontent.com/prometheus/prometheus.github.io/master/assets/prometheus_logo-cb55bb5c346.png
+  iconURL: https://cdn-images-1.medium.com/max/1600/1*-9mb3AKnKdcL_QD3CMnthQ.png
   securityLevel: internal
   stages:
     - name: playground.cc
@@ -13,8 +13,8 @@ spec:
         name: playground
       resources:
         revision: master
-        path: cluster/namespaces/infra-monitoring/agent-prometheus
-      targetNamespace: infra-monitoring
+        path: cluster/namespaces/infra-backup/velero
+      targetNamespace: infra-backup
       previousStage: test-4.sbx
     - name: dev.cc
       cluster:
@@ -22,8 +22,8 @@ spec:
         name: dev
       resources:
         revision: master
-        path: cluster/namespaces/infra-monitoring/agent-prometheus
-      targetNamespace: infra-monitoring
+        path: cluster/namespaces/infra-backup/velero
+      targetNamespace: infra-backup
       previousStage: test-4.sbx
     - name: svc.cc
       cluster:
@@ -31,8 +31,8 @@ spec:
         name: svc
       resources:
         revision: master
-        path: cluster/namespaces/infra-monitoring/agent-prometheus
-      targetNamespace: infra-monitoring
+        path: cluster/namespaces/infra-backup/velero
+      targetNamespace: infra-backup
       previousStage: dev.cc
     - name: staging.apkv
       cluster:
@@ -40,8 +40,8 @@ spec:
         name: staging
       resources:
         revision: master
-        path: cluster/namespaces/infra-monitoring/agent-prometheus
-      targetNamespace: infra-monitoring
+        path: cluster/namespaces/infra-backup/velero
+      targetNamespace: infra-backup
       previousStage: analytics.cc
     - name: prod.apkv
       cluster:
@@ -49,8 +49,8 @@ spec:
         name: prod
       resources:
         revision: master
-        path: cluster/namespaces/infra-monitoring/agent-prometheus
-      targetNamespace: infra-monitoring
+        path: cluster/namespaces/infra-backup/velero
+      targetNamespace: infra-backup
       previousStage: staging.apkv
     - name: edithcare.staging.sda
       cluster:
@@ -58,8 +58,8 @@ spec:
         name: staging
       resources:
         revision: master
-        path: cluster/namespaces/infra-monitoring/agent-prometheus
-      targetNamespace: infra-monitoring
+        path: cluster/namespaces/infra-backup/velero
+      targetNamespace: infra-backup
       previousStage: analytics.cc
     - name: edithcare.prod.sda
       cluster:
@@ -67,8 +67,8 @@ spec:
         name: prod
       resources:
         revision: master
-        path: cluster/namespaces/infra-monitoring/agent-prometheus
-      targetNamespace: infra-monitoring
+        path: cluster/namespaces/infra-backup/velero
+      targetNamespace: infra-backup
       previousStage: edithcare.staging.sda
     - name: svc.sda
       cluster:
@@ -76,8 +76,8 @@ spec:
         name: svc
       resources:
         revision: master
-        path: cluster/namespaces/infra-monitoring/agent-prometheus
-      targetNamespace: infra-monitoring
+        path: cluster/namespaces/infra-backup/velero
+      targetNamespace: infra-backup
       previousStage: svc.cc
     - name: svc.adh
       cluster:
@@ -85,8 +85,8 @@ spec:
         name: svc
       resources:
         revision: master
-        path: cluster/namespaces/infra-monitoring/agent-prometheus
-      targetNamespace: infra-monitoring
+        path: cluster/namespaces/infra-backup/velero
+      targetNamespace: infra-backup
       previousStage: analytics.cc
     - name: dev.adh
       cluster:
@@ -94,8 +94,8 @@ spec:
         name: dev
       resources:
         revision: master
-        path: cluster/namespaces/infra-monitoring/agent-prometheus
-      targetNamespace: infra-monitoring
+        path: cluster/namespaces/infra-backup/velero
+      targetNamespace: infra-backup
       previousStage: analytics.cc
     - name: staging.adh
       cluster:
@@ -103,8 +103,8 @@ spec:
         name: staging
       resources:
         revision: master
-        path: cluster/namespaces/infra-monitoring/agent-prometheus
-      targetNamespace: infra-monitoring
+        path: cluster/namespaces/infra-backup/velero
+      targetNamespace: infra-backup
       previousStage: analytics.cc
     - name: prod.adh
       cluster:
@@ -112,17 +112,26 @@ spec:
         name: prod
       resources:
         revision: master
-        path: cluster/namespaces/infra-monitoring/agent-prometheus
-      targetNamespace: infra-monitoring
+        path: cluster/namespaces/infra-backup/velero
+      targetNamespace: infra-backup
       previousStage: staging.adh
+    - name: analytics.cc
+      cluster:
+        repository: https://github.com/syncier/cluster-cc-analytics.git
+        name: analytics
+      resources:
+        revision: master
+        path: cluster/namespaces/infra-backup/velero
+      targetNamespace: infra-backup
+      previousStage: svc.cc
     - name: dev.abs
       cluster:
         repository: https://github.com/syncier/cluster-abs-syc-dev.git
         name: dev
       resources:
         revision: master
-        path: cluster/namespaces/infra-monitoring/agent-prometheus
-      targetNamespace: infra-monitoring
+        path: cluster/namespaces/infra-backup/velero
+      targetNamespace: infra-backup
       previousStage: test-01.dev
     - name: dev.apkv
       cluster:
@@ -130,8 +139,8 @@ spec:
         name: dev
       resources:
         revision: master
-        path: cluster/namespaces/infra-monitoring/agent-prometheus
-      targetNamespace: infra-monitoring
+        path: cluster/namespaces/infra-backup/velero
+      targetNamespace: infra-backup
       previousStage: analytics.cc
     - name: prod.syc-sst
       cluster:
@@ -139,8 +148,8 @@ spec:
         name: prod-cluster01
       resources:
         revision: master
-        path: cluster/namespaces/infra-monitoring/agent-prometheus
-      targetNamespace: infra-monitoring
+        path: cluster/namespaces/infra-backup/velero
+      targetNamespace: infra-backup
       previousStage: test-01.dev
     - name: test-1.sbx
       cluster:
@@ -148,16 +157,16 @@ spec:
         name: sbx-test-1
       resources:
         revision: master
-        path: cluster/namespaces/infra-monitoring/agent-prometheus
-      targetNamespace: infra-monitoring
+        path: cluster/namespaces/infra-backup/velero
+      targetNamespace: infra-backup
     - name: test-2.sbx
       cluster:
         repository: https://github.com/syncier/cluster-sbx-test2.git
         name: sbx-test-2
       resources:
         revision: master
-        path: cluster/namespaces/infra-monitoring/agent-prometheus
-      targetNamespace: infra-monitoring
+        path: cluster/namespaces/infra-backup/velero
+      targetNamespace: infra-backup
       previousStage: test-1.sbx
     - name: test-3.sbx
       cluster:
@@ -165,8 +174,8 @@ spec:
         name: sbx-test-3
       resources:
         revision: master
-        path: cluster/namespaces/infra-monitoring/agent-prometheus
-      targetNamespace: infra-monitoring
+        path: cluster/namespaces/infra-backup/velero
+      targetNamespace: infra-backup
       previousStage: test-1.sbx
     - name: test-4.sbx
       cluster:
@@ -174,8 +183,8 @@ spec:
         name: sbx-test-4
       resources:
         revision: master
-        path: cluster/namespaces/infra-monitoring/agent-prometheus
-      targetNamespace: infra-monitoring
+        path: cluster/namespaces/infra-backup/velero
+      targetNamespace: infra-backup
       previousStage: test-3.sbx
     - name: test-5.sbx
       cluster:
@@ -183,8 +192,8 @@ spec:
         name: sbx-test-5
       resources:
         revision: master
-        path: cluster/namespaces/infra-monitoring/agent-prometheus
-      targetNamespace: infra-monitoring
+        path: cluster/namespaces/infra-backup/velero
+      targetNamespace: infra-backup
       previousStage: test-1.sbx
     - name: test-6.sbx
       cluster:
@@ -192,8 +201,8 @@ spec:
         name: sbx-test-6
       resources:
         revision: master
-        path: cluster/namespaces/infra-monitoring/agent-prometheus
-      targetNamespace: infra-monitoring
+        path: cluster/namespaces/infra-backup/velero
+      targetNamespace: infra-backup
       previousStage: test-1.sbx
     - name: test-7.sbx
       cluster:
@@ -201,8 +210,8 @@ spec:
         name: sbx-test-7
       resources:
         revision: master
-        path: cluster/namespaces/infra-monitoring/agent-prometheus
-      targetNamespace: infra-monitoring
+        path: cluster/namespaces/infra-backup/velero
+      targetNamespace: infra-backup
       previousStage: test-1.sbx
     - name: test-8.sbx
       cluster:
@@ -210,8 +219,8 @@ spec:
         name: sbx-test-8
       resources:
         revision: master
-        path: cluster/namespaces/infra-monitoring/agent-prometheus
-      targetNamespace: infra-monitoring
+        path: cluster/namespaces/infra-backup/velero
+      targetNamespace: infra-backup
       previousStage: test-1.sbx
     - name: analytics.cc
       cluster:
@@ -219,8 +228,8 @@ spec:
         name: analytics
       resources:
         revision: master
-        path: cluster/namespaces/infra-monitoring/agent-prometheus
-      targetNamespace: infra-monitoring
+        path: cluster/namespaces/infra-backup/velero
+      targetNamespace: infra-backup
       previousStage: svc.cc
     - name: test-01.dev
       cluster:
@@ -228,8 +237,8 @@ spec:
         name: test01
       resources:
         revision: master
-        path: cluster/namespaces/infra-monitoring/agent-prometheus
-      targetNamespace: infra-monitoring
+        path: cluster/namespaces/infra-backup/velero
+      targetNamespace: infra-backup
       previousStage: test-1.sbx
     - name: dev.analytics.grnry
       cluster:
@@ -237,8 +246,8 @@ spec:
         name: analytics-grnry
       resources:
         revision: master
-        path: cluster/namespaces/infra-monitoring/agent-prometheus
-      targetNamespace: infra-monitoring
+        path: cluster/namespaces/infra-backup/velero
+      targetNamespace: infra-backup
       previousStage: test-01.dev
     - name: dev.analytics.abs
       cluster:
@@ -246,8 +255,8 @@ spec:
         name: analytics-dev-seceda01
       resources:
         revision: master
-        path: cluster/namespaces/infra-monitoring/agent-prometheus
-      targetNamespace: infra-monitoring
+        path: cluster/namespaces/infra-backup/velero
+      targetNamespace: infra-backup
       previousStage: test-01.dev
     - name: prod.sst
       cluster:
@@ -255,8 +264,8 @@ spec:
         name: prod-cluster01
       resources:
         revision: master
-        path: cluster/namespaces/infra-monitoring/agent-prometheus
-      targetNamespace: infra-monitoring
+        path: cluster/namespaces/infra-backup/velero
+      targetNamespace: infra-backup
       previousStage: test-01.dev
     - name: prod.analytics.grnry
       cluster:
@@ -264,6 +273,6 @@ spec:
         name: analytics-grnry-prod
       resources:
         revision: master
-        path: cluster/namespaces/infra-monitoring/agent-prometheus
-      targetNamespace: infra-monitoring
+        path: cluster/namespaces/infra-backup/velero
+      targetNamespace: infra-backup
       previousStage: dev.analytics.grnry

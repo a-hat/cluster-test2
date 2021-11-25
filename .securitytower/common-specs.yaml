@@ -1,28 +1,63 @@
 apiVersion: securitytower.io/v1alpha1
 kind: Application
 metadata:
-  name: argocd
+  name: common-specs
 spec:
   applicationOwner: syncier
-  iconURL: https://raw.githubusercontent.com/argoproj/argo-cd/master/docs/assets/argo.png
   securityLevel: internal
   stages:
-    - name: prod.apkv
+    - name: playground.cc
       cluster:
-        repository: https://github.com/syncier/cluster-apkv-prod.git
-        name: prod
+        repository: https://github.com/syncier/cluster-cc-playground.git
+        name: playground
       resources:
         revision: master
-        path: cluster/namespaces/argocd/argocd
+        path: cluster/global/common-specs
       targetNamespace: argocd
-      previousStage: staging.apkv
+      previousStage: test-4.sbx
+    - name: dev.cc
+      cluster:
+        repository: https://github.com/syncier/cluster-cc-dev.git
+        name: dev
+      resources:
+        revision: master
+        path: cluster/global/common-specs
+      targetNamespace: argocd
+      previousStage: test-4.sbx
+    - name: svc.cc
+      cluster:
+        repository: https://github.com/syncier/cluster-cc-svc.git
+        name: svc
+      resources:
+        revision: master
+        path: cluster/global/common-specs
+      targetNamespace: argocd
+      previousStage: dev.cc
     - name: staging.apkv
       cluster:
         repository: https://github.com/syncier/cluster-apkv-staging.git
         name: staging
       resources:
         revision: master
-        path: cluster/namespaces/argocd/argocd
+        path: cluster/global/common-specs
+      targetNamespace: argocd
+      previousStage: analytics.cc
+    - name: prod.apkv
+      cluster:
+        repository: https://github.com/syncier/cluster-apkv-prod.git
+        name: prod
+      resources:
+        revision: master
+        path: cluster/global/common-specs
+      targetNamespace: argocd
+      previousStage: staging.apkv
+    - name: edithcare.staging.sda
+      cluster:
+        repository: https://github.com/syncier/cluster-sda-edithcare-staging.git
+        name: staging
+      resources:
+        revision: master
+        path: cluster/global/common-specs
       targetNamespace: argocd
       previousStage: analytics.cc
     - name: edithcare.prod.sda
@@ -31,43 +66,25 @@ spec:
         name: prod
       resources:
         revision: master
-        path: cluster/namespaces/argocd/argocd
+        path: cluster/global/common-specs
       targetNamespace: argocd
       previousStage: edithcare.staging.sda
-    - name: edithcare.staging.sda
-      cluster:
-        repository: https://github.com/syncier/cluster-sda-edithcare-staging.git
-        name: staging
-      resources:
-        revision: master
-        path: cluster/namespaces/argocd/argocd
-      targetNamespace: argocd
-      previousStage: analytics.cc
     - name: svc.sda
       cluster:
         repository: https://github.com/syncier/cluster-sda-svc.git
         name: svc
       resources:
         revision: master
-        path: cluster/namespaces/argocd/argocd
+        path: cluster/global/common-specs
       targetNamespace: argocd
       previousStage: svc.cc
-    - name: prod.adh
+    - name: svc.adh
       cluster:
-        repository: https://github.com/syncier/cluster-adh-prod.git
-        name: prod
+        repository: https://github.com/syncier/cluster-adh-svc.git
+        name: svc
       resources:
         revision: master
-        path: cluster/namespaces/argocd/argocd
-      targetNamespace: argocd
-      previousStage: staging.adh
-    - name: staging.adh
-      cluster:
-        repository: https://github.com/syncier/cluster-adh-staging.git
-        name: staging
-      resources:
-        revision: master
-        path: cluster/namespaces/argocd/argocd
+        path: cluster/global/common-specs
       targetNamespace: argocd
       previousStage: analytics.cc
     - name: dev.adh
@@ -76,70 +93,43 @@ spec:
         name: dev
       resources:
         revision: master
-        path: cluster/namespaces/argocd/argocd
+        path: cluster/global/common-specs
       targetNamespace: argocd
       previousStage: analytics.cc
-    - name: svc.adh
+    - name: staging.adh
       cluster:
-        repository: https://github.com/syncier/cluster-adh-svc.git
-        name: svc
+        repository: https://github.com/syncier/cluster-adh-staging.git
+        name: staging
       resources:
         revision: master
-        path: cluster/namespaces/argocd/argocd
+        path: cluster/global/common-specs
       targetNamespace: argocd
       previousStage: analytics.cc
+    - name: prod.adh
+      cluster:
+        repository: https://github.com/syncier/cluster-adh-prod.git
+        name: prod
+      resources:
+        revision: master
+        path: cluster/global/common-specs
+      targetNamespace: argocd
+      previousStage: staging.adh
     - name: analytics.cc
       cluster:
         repository: https://github.com/syncier/cluster-cc-analytics.git
         name: analytics
       resources:
         revision: master
-        path: cluster/namespaces/argocd/argocd
+        path: cluster/global/common-specs
       targetNamespace: argocd
       previousStage: svc.cc
-    - name: svc.cc
-      cluster:
-        repository: https://github.com/syncier/cluster-cc-svc.git
-        name: svc
-      resources:
-        revision: master
-        path: cluster/namespaces/argocd/argocd
-      targetNamespace: argocd
-      previousStage: dev.cc
-    - name: dev.cc
-      cluster:
-        repository: https://github.com/syncier/cluster-cc-dev.git
-        name: dev
-      resources:
-        revision: master
-        path: cluster/namespaces/argocd/argocd
-      targetNamespace: argocd
-      previousStage: test-4.sbx
-    - name: playground.cc
-      cluster:
-        repository: https://github.com/syncier/cluster-cc-playground.git
-        name: playground
-      resources:
-        revision: master
-        path: cluster/namespaces/argocd/argocd
-      targetNamespace: argocd
-      previousStage: test-4.sbx
-    - name: prod.syc-sst
-      cluster:
-        repository: https://github.com/syncier/cluster-syc-sst-prod-cluster01.git
-        name: prod-cluster01
-      resources:
-        revision: master
-        path: cluster/namespaces/argocd/argocd
-      targetNamespace: argocd
-      previousStage: test-01.dev
     - name: dev.abs
       cluster:
         repository: https://github.com/syncier/cluster-abs-syc-dev.git
         name: dev
       resources:
         revision: master
-        path: cluster/namespaces/argocd/argocd
+        path: cluster/global/common-specs
       targetNamespace: argocd
       previousStage: test-01.dev
     - name: dev.apkv
@@ -148,16 +138,25 @@ spec:
         name: dev
       resources:
         revision: master
-        path: cluster/namespaces/argocd/argocd
+        path: cluster/global/common-specs
       targetNamespace: argocd
       previousStage: analytics.cc
+    - name: prod.syc-sst
+      cluster:
+        repository: https://github.com/syncier/cluster-syc-sst-prod-cluster01.git
+        name: prod-cluster01
+      resources:
+        revision: master
+        path: cluster/global/common-specs
+      targetNamespace: argocd
+      previousStage: test-01.dev
     - name: test-1.sbx
       cluster:
         repository: https://github.com/syncier/cluster-sbx-test1.git
         name: sbx-test-1
       resources:
         revision: master
-        path: cluster/namespaces/argocd/argocd
+        path: cluster/global/common-specs
       targetNamespace: argocd
     - name: test-2.sbx
       cluster:
@@ -165,7 +164,7 @@ spec:
         name: sbx-test-2
       resources:
         revision: master
-        path: cluster/namespaces/argocd/argocd
+        path: cluster/global/common-specs
       targetNamespace: argocd
       previousStage: test-1.sbx
     - name: test-3.sbx
@@ -174,7 +173,7 @@ spec:
         name: sbx-test-3
       resources:
         revision: master
-        path: cluster/namespaces/argocd/argocd
+        path: cluster/global/common-specs
       targetNamespace: argocd
       previousStage: test-1.sbx
     - name: test-4.sbx
@@ -183,7 +182,7 @@ spec:
         name: sbx-test-4
       resources:
         revision: master
-        path: cluster/namespaces/argocd/argocd
+        path: cluster/global/common-specs
       targetNamespace: argocd
       previousStage: test-3.sbx
     - name: test-5.sbx
@@ -192,7 +191,7 @@ spec:
         name: sbx-test-5
       resources:
         revision: master
-        path: cluster/namespaces/argocd/argocd
+        path: cluster/global/common-specs
       targetNamespace: argocd
       previousStage: test-1.sbx
     - name: test-6.sbx
@@ -201,7 +200,7 @@ spec:
         name: sbx-test-6
       resources:
         revision: master
-        path: cluster/namespaces/argocd/argocd
+        path: cluster/global/common-specs
       targetNamespace: argocd
       previousStage: test-1.sbx
     - name: test-7.sbx
@@ -210,7 +209,7 @@ spec:
         name: sbx-test-7
       resources:
         revision: master
-        path: cluster/namespaces/argocd/argocd
+        path: cluster/global/common-specs
       targetNamespace: argocd
       previousStage: test-1.sbx
     - name: test-8.sbx
@@ -219,16 +218,25 @@ spec:
         name: sbx-test-8
       resources:
         revision: master
-        path: cluster/namespaces/argocd/argocd
+        path: cluster/global/common-specs
       targetNamespace: argocd
       previousStage: test-1.sbx
+    - name: analytics.cc
+      cluster:
+        repository: https://github.com/syncier/cluster-cc-analytics.git
+        name: analytics
+      resources:
+        revision: master
+        path: cluster/global/common-specs
+      targetNamespace: argocd
+      previousStage: svc.cc
     - name: test-01.dev
       cluster:
         repository: https://github.com/syncier/cluster-syc-cloud-dev-test01.git
         name: test01
       resources:
         revision: master
-        path: cluster/namespaces/argocd/argocd
+        path: cluster/global/common-specs
       targetNamespace: argocd
       previousStage: test-1.sbx
     - name: dev.analytics.grnry
@@ -237,7 +245,7 @@ spec:
         name: analytics-grnry
       resources:
         revision: master
-        path: cluster/namespaces/argocd/argocd
+        path: cluster/global/common-specs
       targetNamespace: argocd
       previousStage: test-01.dev
     - name: dev.analytics.abs
@@ -246,7 +254,16 @@ spec:
         name: analytics-dev-seceda01
       resources:
         revision: master
-        path: cluster/namespaces/argocd/argocd
+        path: cluster/global/common-specs
+      targetNamespace: argocd
+      previousStage: test-01.dev
+    - name: prod.sst
+      cluster:
+        repository: https://github.com/syncier/cluster-syc-sst-prod-cluster01.git
+        name: prod-cluster01
+      resources:
+        revision: master
+        path: cluster/global/common-specs
       targetNamespace: argocd
       previousStage: test-01.dev
     - name: prod.analytics.grnry
@@ -255,6 +272,6 @@ spec:
         name: analytics-grnry-prod
       resources:
         revision: master
-        path: cluster/namespaces/argocd/argocd
+        path: cluster/global/common-specs
       targetNamespace: argocd
       previousStage: dev.analytics.grnry
