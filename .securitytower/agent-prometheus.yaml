@@ -221,6 +221,7 @@ spec:
         revision: master
         path: cluster/namespaces/infra-monitoring/agent-prometheus
       targetNamespace: infra-monitoring
+      previousStage: svc.cc
     - name: analytics-grnry.cc
       cluster:
         repository: https://github.com/syncier/cluster-dev-grnry-analytics.git
