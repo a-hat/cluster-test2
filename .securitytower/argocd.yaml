@@ -1,7 +1,7 @@
 apiVersion: securitytower.io/v1alpha1
 kind: Application
 metadata:
-  name: argocd-condensed
+  name: argocd
 spec:
   applicationOwner: syncier
   iconURL: https://raw.githubusercontent.com/argoproj/argo-cd/master/docs/assets/argo.png
@@ -24,7 +24,7 @@ spec:
         revision: master
         path: cluster/namespaces/argocd/argocd
       targetNamespace: argocd
-      previousStage: analytics.cc
+      previousStage: svc.cc
     - name: edithcare.prod.sda
       cluster:
         repository: https://github.com/syncier/cluster-sda-edithcare-prod.git
@@ -42,7 +42,16 @@ spec:
         revision: master
         path: cluster/namespaces/argocd/argocd
       targetNamespace: argocd
-      previousStage: analytics.cc
+      previousStage: svc.cc
+    - name: svc.sda
+      cluster:
+        repository: https://github.com/syncier/cluster-sda-svc.git
+        name: svc
+      resources:
+        revision: master
+        path: cluster/namespaces/argocd/argocd
+      targetNamespace: argocd
+      previousStage: svc.cc
     - name: prod.adh
       cluster:
         repository: https://github.com/syncier/cluster-adh-prod.git
@@ -69,7 +78,7 @@ spec:
         revision: master
         path: cluster/namespaces/argocd/argocd
       targetNamespace: argocd
-      previousStage: analytics.cc
+      previousStage: svc.cc
     - name: svc.adh
       cluster:
         repository: https://github.com/syncier/cluster-adh-svc.git
@@ -78,7 +87,7 @@ spec:
         revision: master
         path: cluster/namespaces/argocd/argocd
       targetNamespace: argocd
-      previousStage: analytics.cc
+      previousStage: svc.cc
     - name: analytics-grnry.cc
       cluster:
         repository: https://github.com/syncier/cluster-dev-grnry-analytics.git
@@ -87,7 +96,7 @@ spec:
         revision: master
         path: cluster/namespaces/argocd
       targetNamespace: argocd
-      previousStage: test4.sbx
+      previousStage: svc.cc
     - name: analytics.cc
       cluster:
         repository: https://github.com/syncier/cluster-cc-analytics.git
@@ -96,7 +105,7 @@ spec:
         revision: master
         path: cluster/namespaces/argocd/argocd
       targetNamespace: argocd
-      previousStage: test4.sbx
+      previousStage: svc.cc
     - name: svc.cc
       cluster:
         repository: https://github.com/syncier/cluster-cc-svc.git
@@ -105,7 +114,7 @@ spec:
         revision: master
         path: cluster/namespaces/argocd/argocd
       targetNamespace: argocd
-      previousStage: test4.sbx
+      previousStage: playground.cc
     - name: dev.cc
       cluster:
         repository: https://github.com/syncier/cluster-cc-dev.git
@@ -114,7 +123,7 @@ spec:
         revision: master
         path: cluster/namespaces/argocd/argocd
       targetNamespace: argocd
-      previousStage: test4.sbx
+      previousStage: playground.cc
     - name: playground.cc
       cluster:
         repository: https://github.com/syncier/cluster-cc-playground.git
@@ -123,7 +132,6 @@ spec:
         revision: master
         path: cluster/namespaces/argocd/argocd
       targetNamespace: argocd
-      previousStage: test4.sbx
     - name: prod.syc-sst
       cluster:
         repository: https://github.com/syncier/cluster-syc-sst-prod-cluster01.git
@@ -132,7 +140,7 @@ spec:
         revision: master
         path: cluster/namespaces/argocd/argocd
       targetNamespace: argocd
-      previousStage: analytics.cc
+      previousStage: svc.cc
     - name: dev.abs
       cluster:
         repository: https://github.com/syncier/cluster-abs-syc-dev.git
@@ -141,7 +149,7 @@ spec:
         revision: master
         path: cluster/namespaces/argocd/argocd
       targetNamespace: argocd
-      previousStage: analytics.cc
+      previousStage: svc.cc
     - name: dev.apkv
       cluster:
         repository: https://github.com/syncier/cluster-apkv-dev.git
@@ -150,8 +158,8 @@ spec:
         revision: master
         path: cluster/namespaces/argocd/argocd
       targetNamespace: argocd
-      previousStage: analytics.cc
-    - name: test1.sbx
+      previousStage: svc.cc
+    - name: test-1.sbx
       cluster:
         repository: https://github.com/syncier/cluster-sbx-test1.git
         name: sbx-test-1
@@ -159,7 +167,8 @@ spec:
         revision: master
         path: cluster/namespaces/argocd/argocd
       targetNamespace: argocd
-    - name: test2.sbx
+      previousStage: playground.cc
+    - name: test-2.sbx
       cluster:
         repository: https://github.com/syncier/cluster-sbx-test2.git
         name: sbx-test-2
@@ -167,8 +176,8 @@ spec:
         revision: master
         path: cluster/namespaces/argocd/argocd
       targetNamespace: argocd
-      previousStage: test1.sbx
-    - name: test3.sbx
+      previousStage: playground.cc
+    - name: test-3.sbx
       cluster:
         repository: https://github.com/syncier/cluster-sbx-test3.git
         name: sbx-test-3
@@ -176,8 +185,8 @@ spec:
         revision: master
         path: cluster/namespaces/argocd/argocd
       targetNamespace: argocd
-      previousStage: test1.sbx
-    - name: test4.sbx
+      previousStage: playground.cc
+    - name: test-4.sbx
       cluster:
         repository: https://github.com/syncier/cluster-sbx-test4.git
         name: sbx-test-4
@@ -185,8 +194,8 @@ spec:
         revision: master
         path: cluster/namespaces/argocd/argocd
       targetNamespace: argocd
-      previousStage: test3.sbx
-    - name: test5.sbx
+      previousStage: playground.cc
+    - name: test-5.sbx
       cluster:
         repository: https://github.com/syncier/cluster-sbx-test5.git
         name: sbx-test-5
@@ -194,8 +203,8 @@ spec:
         revision: master
         path: cluster/namespaces/argocd/argocd
       targetNamespace: argocd
-      previousStage: test1.sbx
-    - name: test6.sbx
+      previousStage: playground.cc
+    - name: test-6.sbx
       cluster:
         repository: https://github.com/syncier/cluster-sbx-test6.git
         name: sbx-test-6
@@ -203,8 +212,8 @@ spec:
         revision: master
         path: cluster/namespaces/argocd/argocd
       targetNamespace: argocd
-      previousStage: test1.sbx
-    - name: test7.sbx
+      previousStage: playground.cc
+    - name: test-7.sbx
       cluster:
         repository: https://github.com/syncier/cluster-sbx-test7.git
         name: sbx-test-7
@@ -212,8 +221,8 @@ spec:
         revision: master
         path: cluster/namespaces/argocd/argocd
       targetNamespace: argocd
-      previousStage: test1.sbx
-    - name: test8.sbx
+      previousStage: playground.cc
+    - name: test-8.sbx
       cluster:
         repository: https://github.com/syncier/cluster-sbx-test8.git
         name: sbx-test-8
@@ -221,4 +230,4 @@ spec:
         revision: master
         path: cluster/namespaces/argocd/argocd
       targetNamespace: argocd
-      previousStage: test1.sbx
+      previousStage: playground.cc
