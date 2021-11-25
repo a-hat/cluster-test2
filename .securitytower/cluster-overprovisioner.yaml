@@ -1,0 +1,107 @@
+apiVersion: securitytower.io/v1alpha1
+kind: Application
+metadata:
+  name: cluster-overprovisioner
+spec:
+  applicationOwner: syncier
+  iconURL: https://github.com/kubernetes/kubernetes/raw/master/logo/logo.png
+  securityLevel: internal
+  stages:
+    - name: dev.cc
+      cluster:
+        repository: https://github.com/syncier/cluster-cc-dev.git
+        name: dev
+      resources:
+        revision: master
+        path: cluster/namespaces/infra/cluster-overprovisioner
+      targetNamespace: infra
+      previousStage: test-4.sbx
+    - name: dev.adh
+      cluster:
+        repository: https://github.com/syncier/cluster-adh-dev.git
+        name: dev
+      resources:
+        revision: master
+        path: cluster/namespaces/infra/cluster-overprovisioner
+      targetNamespace: infra
+      previousStage: analytics.cc
+    - name: staging.adh
+      cluster:
+        repository: https://github.com/syncier/cluster-adh-staging.git
+        name: staging
+      resources:
+        revision: master
+        path: cluster/namespaces/infra/cluster-overprovisioner
+      targetNamespace: infra
+      previousStage: analytics.cc
+    - name: prod.adh
+      cluster:
+        repository: https://github.com/syncier/cluster-adh-prod.git
+        name: prod
+      resources:
+        revision: master
+        path: cluster/namespaces/infra/cluster-overprovisioner
+      targetNamespace: infra
+      previousStage: staging.adh
+    - name: test-1.sbx
+      cluster:
+        repository: https://github.com/syncier/cluster-sbx-test1.git
+        name: sbx-test-1
+      resources:
+        revision: master
+        path: cluster/namespaces/infra/cluster-overprovisioner
+      targetNamespace: infra
+    - name: test-2.sbx
+      cluster:
+        repository: https://github.com/syncier/cluster-sbx-test2.git
+        name: sbx-test-2
+      resources:
+        revision: master
+        path: cluster/namespaces/infra/cluster-overprovisioner
+      targetNamespace: infra
+      previousStage: test-1.sbx
+    - name: test-4.sbx
+      cluster:
+        repository: https://github.com/syncier/cluster-sbx-test4.git
+        name: sbx-test-4
+      resources:
+        revision: master
+        path: cluster/namespaces/infra/cluster-overprovisioner
+      targetNamespace: infra
+      previousStage: test-2.sbx
+    - name: test-5.sbx
+      cluster:
+        repository: https://github.com/syncier/cluster-sbx-test5.git
+        name: sbx-test-5
+      resources:
+        revision: master
+        path: cluster/namespaces/infra/cluster-overprovisioner
+      targetNamespace: infra
+      previousStage: test-1.sbx
+    - name: test-8.sbx
+      cluster:
+        repository: https://github.com/syncier/cluster-sbx-test8.git
+        name: sbx-test-8
+      resources:
+        revision: master
+        path: cluster/namespaces/infra/cluster-overprovisioner
+      targetNamespace: infra
+      previousStage: test-1.sbx
+    - name: analytics.cc
+      cluster:
+        repository: https://github.com/syncier/cluster-cc-analytics.git
+        name: analytics
+      resources:
+        revision: master
+        path: cluster/namespaces/infra/cluster-overprovisioner
+      targetNamespace: infra
+      previousStage: dev.cc
+    - name: playground.cc
+      cluster:
+        repository: https://github.com/syncier/cluster-cc-playground.git
+        name: playground
+      resources:
+        revision: master
+        path: cluster/namespaces/infra/cluster-overprovisioner
+      targetNamespace: infra
+      previousStage: test-4.sbx
